@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import logo from './logo.svg';
 // import { useLocalStorage, useDisplay } from './components/Display';
 import Display from './components/Display';
@@ -15,6 +15,12 @@ function App() {
   const [strike, setStrike] = useState(0); 
   const [hit, setHit] = useState(false); 
   const [foul, setFoul] = useState(0); 
+
+  useEffect(() => { 
+    if(foul === 1 && strike === 0 || strike === 1 ) {
+      setStrike(strike + 1)
+    }
+  },[foul])
   return (
     <div className="App">
       <Display  hit={hit} strike={strike}
@@ -22,7 +28,7 @@ function App() {
       <Dashboard foul={foul} setFoul={setFoul} setHit={setHit} setBall={setBall} setStrike={setStrike} ball={ball} strike={strike}/> 
       {/* <button onClick = {() => setFoul(foul + 1)} > Foul </button>
       {foul === 1 ? setStrike(strike + 1) : false} */}
-      {/* <button onClick={setFoul(foul + 1)}>Foul</button> */}
+      
     </div>
   );
 }
